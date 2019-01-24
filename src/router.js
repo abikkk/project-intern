@@ -36,9 +36,9 @@ export default new Router({
             component:()=>import('./views/LeaveRequests.vue'),
           },
           {
-            path: '/Try',
-            name: 'Try',
-            component: ()=>import('./views/Try.vue'),
+            path: '/Password-Reset',
+            name: 'Password-Reset',
+            component: ()=>import('./views/PasswordReset.vue'),
           },
           {
             path: '/Leave-Reports',
@@ -99,7 +99,12 @@ export default new Router({
           path:'/Login',
           name:'Login',
           component:()=>import ('./views/Login.vue'),
-        }
+        },
+        {
+          path: '/New-Password/*',
+          name: 'New-Password',
+          component: ()=>import('./views/NewPassword.vue'),
+        },
       ]
     },
     {

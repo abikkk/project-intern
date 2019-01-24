@@ -18,7 +18,19 @@ export default {
 <style>
 html,body{
   height: 100%;
+  transition: .3s
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease-in-out;
+}
+.fade-enter-active{
+  opacity: 1;
+} 
+.fade-leave-active /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 .main-container{
   font-family:sans-serif;
   font-size: 12px;

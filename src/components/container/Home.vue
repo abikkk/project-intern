@@ -184,11 +184,11 @@ header:hover{
 }
 
 #om-nav{
-  height: 85vh;
+  height: 80vh;
 } 
 
 #admin-nav{
-  height: 85vh;
+  height: 80vh;
 }
 
 #nav-bars{

@@ -12,10 +12,8 @@
       </div>
       <br>
       <div name="options" id="password_options">
-        <p id="wrong_password" hidden>
-              Your username and password didn't match, please try again!
-            </p>
-        <router-link to="/Try">Reset your password?</router-link>
+        <p id="p_error"/>
+        <router-link to="/Password-Reset">Reset your password?</router-link>
         <v-label v-model="labelpass"></v-label>
       </div>
       <br>
@@ -52,8 +50,6 @@ export default {
         .then(response => {
           const token=response.data.token
           console.log('login response')
-          document.getElementById('wrong_password').innerHTML='Loggin in... Please wait...'
-          document.getElementById('wrong_password').hidden=false
           localStorage.setItem('token','token '+token)//creating token for user login
           localStorage.setItem('username',this.name)//storing current username
           console.log('Logged User: '+ this.name)
@@ -61,8 +57,14 @@ export default {
           this.$router.push('/Home')
         })
         .catch(function (error) {
-          console.log('error: error in login.' + error)
-          document.getElementById('wrong_password').hidden=false
+          if(error==='Network Error'){
+            console.log('error: error in login.' + error)
+            document.getElementById('wrong_password').innerHTML='Network Error'
+          }
+          else{
+            console.log('error: error in login.' + error)
+            document.getElementById('wrong_password').innerHTML='Your username and password did not match. Try again.'
+          }
         })
       },
       /*
