@@ -1,7 +1,6 @@
 <template>
    <div id="leavereq-body">
      <h1>Leave Requests</h1>
-     <v-card class="cards" id="card-main">
        <v-form ref="form" v-model="valid" >
          <h2>Form:</h2>
          <v-select
@@ -10,7 +9,6 @@
             :rules="[rules.required]"
             label="Select leave type"
             required/>
-
         <!--calender from -->
         <v-layout row wrap>
           <v-flex xs12 sm6 md4>
@@ -61,11 +59,14 @@
 
         <v-text-field v-model="Description" :rules="[rules.required,rules.exceed,rules.notenough]" 
         :counter="150" label="Description  for your leave" required/>
+        
+        <p id="p_error"/>
+        
         <v-btn @click="cancel()" color="primary">Cancel</v-btn>
         <v-btn @click="clear()">Reset</v-btn>
         <v-btn :disabled="!valid" :loading="isLoading" color="success" @click="request()">Request</v-btn>
        </v-form>
-    </v-card>
+       
     <router-view/>
   </div>
 </template>
@@ -93,7 +94,8 @@ import {baseUrl} from '../utils/misc'
           exceed: v=>v.length<150 || 'Character limit exceeded',
           notenough: v=>v.length>20 || 'Atleast 20 characters required'
           },
-          leave_type:[]
+          leave_type:[],
+          days_remaining:'',
         }
       },
 
@@ -144,6 +146,7 @@ import {baseUrl} from '../utils/misc'
           })
           .catch(function (error) {
             console.log('error: error in request.' + error)
+            document.getElementById('p_error').innerHTML=error + ' Try again.'
           })
         },
         cancel(){
@@ -154,10 +157,6 @@ import {baseUrl} from '../utils/misc'
 </script>
 
 <style>
-#leavereq-body{
-  /* margin-top: 2.5%; */
-}
-
 #card-main{
   padding: 2%
 }

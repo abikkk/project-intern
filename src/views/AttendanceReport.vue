@@ -1,5 +1,6 @@
 <template>
   <div id="attendreport-body">
+    <h2>Overall Attendance Report:</h2>
     <v-data-table class="tables" :headers="headers" :items="attendreport">
       <template slot="items" slot-scope="prop">
         <td> {{ prop.item.user.username }} </td>
@@ -20,10 +21,10 @@ export default {
   data:()=>({
     attendreport:[],
     headers:[
-      {text:'Username',value:'user'},
-      {text:'In time',value:'check_in'},
-      {text:'Out time',value:'check_out'},
-      {text:'Check in date',value:'check_in_date'},
+      {text:'Username',value:'user.username'},
+      {text:'In time(hr.min.sec)',value:'check_in'},
+      {text:'Out time(hr.min.sec)',value:'check_out'},
+      {text:'Check in date(yyyy-mm-dd)',value:'check_in_date'},
     ]
   }),
   mounted(){
@@ -34,7 +35,7 @@ export default {
       Axios({
         methods:'get',
         url: baseUrl + 'attend/v1/view-attendance',
-        headers: {Authentication: localStorage.getItem('token')}
+        headers: {Authorization: localStorage.getItem('token')}
       })
         .then(resp=>{
           this.attendreport=resp.data
@@ -49,7 +50,5 @@ export default {
 </script>
 
 <style lang="scss">
-#attendreport-body{
-  // margin-top: 2.5%;
-}
+
 </style>

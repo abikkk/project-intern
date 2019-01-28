@@ -2,7 +2,6 @@
   <div id="account-body">
     <h1>Account</h1>
     <br>
-    <v-card class="cards" id="card-form">
     <h3>Change your informations:</h3> <br>
       <v-form ref="form" v-model="form">
         <v-text-field v-model="fname" :rules="nameRules" label="First Name" required/>
@@ -18,8 +17,6 @@
         <v-spacer/>
         <v-btn :disabled="!form" :loading="isLoading" color="primary" @click="submit()">Update</v-btn>
       </v-card-actions>
-  </v-card>
-
   <router-view/>
 </div>
 </template>
@@ -67,7 +64,7 @@ import {baseUrl} from '../utils/misc'
             headers: {Authorization: localStorage.getItem('token')}
           }).then(response => {
             console.log(response)
-          this.setGroups(response.data)
+            this.setGroups(response.data)
         })
         .catch(function(error){
           console.log('error: error in getGroups' + error)
@@ -88,7 +85,7 @@ import {baseUrl} from '../utils/misc'
             headers: {Authorization: localStorage.getItem('token')}
           }).then(response => {
             console.log(response)
-          this.setBranches(response.data)
+            this.setBranches(response.data)
         })
         .catch(function (error){
           console.log('error: error in getBranches.' + error)
@@ -119,7 +116,7 @@ import {baseUrl} from '../utils/misc'
         .then(response => {
           if(localStorage.getItem('username')===this.username){
             console.log('success: account update success')
-            this.mounted()
+            location.reload()
           }
           else{
             console.log('success: account update success')
@@ -171,7 +168,5 @@ import {baseUrl} from '../utils/misc'
 </script>
 
 <style lang="scss">
-#account-body{
-  // margin-top:2.5%
-}
+
 </style>

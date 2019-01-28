@@ -1,19 +1,26 @@
 <template>
-    <div>
-        <p id="p_uid"></p>
-        <p id="p_token"></p>
-        <v-card>
+    <div id="newpassword-body">
             <v-card-title>
                 <h2>New Password:</h2>
             </v-card-title>
             <v-card-text>
                 Enter your new password:
-                <v-text-field type="password" v-model="new_password" label="New Password" :rules="[rules.password,rules.required]" required/>
+                <v-text-field type="password" v-model="new_password" label="Enter a 8-character password" :rules="[rules.password,rules.required]" required/>
                     <v-card-actions>
+                        <v-btn @click="cancel()">Cancel</v-btn>
                         <v-btn :disabled=!new_password @click="submit(new_password)">Submit</v-btn>
                     </v-card-actions>
+                    <p id="p_error"/>
+                    <v-dialog width="fit-content" v-model="success">
+                        <v-card class="cards">
+                            New password updated, you will be re-directed to login screen now.
+                            You can now login to the system with your new password.
+                            <v-card-actions>
+                                <v-btn @click="done()" color="primary">Close</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
             </v-card-text>
-        </v-card>
     </div>
 </template>
 
@@ -25,6 +32,7 @@ export default {
     name:'New-Password',
     data:()=>({
         new_password:'',
+        success:false,
       rules:{
         required: v => !!v || 'Cannot be left empty',
         password:v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
@@ -36,6 +44,9 @@ export default {
         this.getQueryTOKEN("token")
     },
     methods:{
+        cancel(){
+            this.$router.push('/Login')
+        },
         getQueryUID(variable)
             {
                 var query = window.location.href.substring(43);
@@ -76,13 +87,16 @@ export default {
                 })
                 .then(response=>{
                     console.log('success: ' + newpass)
-                    this.$router.push('/Login')
+                    this.success=true
                 })
                 .catch(function(error){
                     console.log('error: error in submit()' + error)
+                    document.getElementById('p_error').innerHTML='Something is not right, please try again with a different password.'
                 })
+            },
+            done(){
+                this.$router.push('/Login')
             }
-            
     }
 }
     

@@ -1,6 +1,6 @@
 <template>
     <div id="leaverequests-body">
-        <h2>Submitted Leave Requests</h2>
+            <h2>Submitted Leave Requests</h2>
             <v-data-table :headers="header" :items="reports" class="tables">
                 <template slot="items" slot-scope="prop">
                     <td> {{prop.item.leave_id}} </td>
@@ -9,7 +9,7 @@
                     <td>{{ prop.item.datefrom }}</td>
                     <td>{{ prop.item.dateto }}</td>
                     <td>{{ prop.item.status }}</td>
-                    <td>{{ prop.item.leavetype }}</td>
+                    <td>{{ prop.item.leavetype.leave_type }}</td>
                 </template>
             </v-data-table>
     </div>
@@ -70,7 +70,5 @@ export default {
 </script>
 
 <style>
-#leaverequests-body{
-    /* margin-top: 2.5% */
-}
+
 </style>

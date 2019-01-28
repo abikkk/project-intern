@@ -1,9 +1,13 @@
 <template>
 <div id="password_reset">
-  <h4>Reset Password</h4>
-  <v-text-field v-model="reset_email" required/>
-  <p id="p_error"/>
-  <v-btn :disabled=!reset_email @click="sendemail()">Send Confirmation Email</v-btn>
+  <h3>Send Reset Password Email</h3>
+    <v-text-field v-model="reset_email" :rules="[rules.required,rules.email]" label="Enter your email ID" required/>
+    <p id="p_error"/>
+    <v-card-actions>
+      <v-btn @click="cancel()">Cancel</v-btn>
+      <v-divider/>
+      <v-btn :disabled="!reset_email" @click="sendemail()" color="primary">Send Confirmation Email</v-btn>
+    </v-card-actions>
 </div>
 </template>
 
@@ -14,9 +18,17 @@ import { baseUrl } from '../utils/misc';
 export default {
     name:'Password-Reset',
     data:()=>({
-      
+      reset_email:'',
+      reset:true,
+      rules: {
+        required:v => !!v || 'Must have an Email Address. Google? Yahoo? Something?',
+        email:v => /.+@.+/.test(v) || 'E-mail not valid, try again.'
+      }
     }),
     methods:{
+      cancel(){
+        this.$router.push('/Login')
+      },
       sendemail(){
         Axios({
           method:'post',
@@ -27,6 +39,7 @@ export default {
         })
         .then(respo=>{
           console.log(respo.data)
+          this.$router.push('/Login')
         })
         .catch(function(error){
           console.log('error: error in sendemail.' + error)
@@ -38,7 +51,5 @@ export default {
 </script>
 
 <style>
-#password_reset{
-  /* margin-top: 2.5% */
-}
+
 </style>

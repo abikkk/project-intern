@@ -26,7 +26,7 @@
       </tr>
       <tr><td id="nav-td"><router-link id="nav-item" to="/Leave-Types">Leave Types</router-link></td>
       </tr>
-      <tr><td id="nav-td"><router-link id="nav-item" to="/Users-Delete">Delete Users </router-link></td>
+      <tr><td id="nav-td"><router-link id="nav-item" to="/Users">View/Edit Users </router-link></td>
       </tr>
     </table>
   </div>
@@ -38,15 +38,37 @@
       </tr>
       <tr><td id="nav-td"><router-link id="nav-item" to="/Leave-Reports">Leave Reports</router-link></td>
       </tr>
-      <tr><td id="nav-td"><router-link id="nav-item" to="/Users-Delete">Delete User</router-link></td>
+      <tr><td id="nav-td"><router-link id="nav-item" to="/Users">View/Edit Users</router-link></td>
       </tr>
     </table>
   </div>
 </div>
+
 <!-- main body -->
   <div id="main-container-body">
-    <router-view/>
+    <v-card class="cards">
+      <router-view/>
+    </v-card>
   </div>
+
+<!-- profile view -->
+<div id="profile_view">
+  <h4>Profile:<p id="p_group" class="pv-text"/></h4>
+  UserName: <p id="p_username" class="pv-text"/>
+  First Name: <p id="p_fname" class="pv-text"/>
+  Contact: <p id="p_contact" class="pv-text"/>
+  Current Branch: <p id="p_branch" class="pv-text"/>
+  Email: <p id="p_email" class="pv-text"/>
+  For detailed view, click <router-link to="/Account-Update">here.</router-link>
+  <v-divider/>
+
+  <!-- attend stat -->
+  <div id="attend-stat">
+    <h4>Attendance Status:</h4>
+    <p id="check_status"></p>
+      Check in time: <router-link to="/Attendance-View"><p id="attend-pv"/></router-link>
+  </div>
+</div>
 
 <!--Logout Module -->
   <v-dialog width="fit-content" v-model="dialog" absolute id="dailog-box" persistent>
@@ -143,7 +165,7 @@
   float: left;
   width: 95%;
   transition: .3s;
-  height: 100%;
+  height: fit-content ;
   border-left-style: solid;
   border-left-width: 1px;
 #dailog-box{
@@ -188,7 +210,7 @@ header:hover{
 } 
 
 #admin-nav{
-  height: 80vh;
+  height: 40vh;
 }
 
 #nav-bars{
@@ -206,28 +228,35 @@ header:hover{
 
 .tables{
   background-color: #def2f1;
-  padding: .5%;
+  padding: 1%;
+  width: 100%;
 }
 
 .cards{
   padding: 1%;
   background-color: #def2f1;
+  height: fit-content;
 }
 
 footer{
   position: absolute;;
-  bottom: 0%;
+  bottom: 0;
   right:0;
+  height: fit-content;
   transition: .3s;
   border-radius: 5%;
   cursor:pointer;
   width: 100%;
   padding-left: 1%;
   padding-right: 1%;
+p{
+  float: right;
   transition: .3s;
 }
-footer:hover{
+p:hover{
   z-index: 1;
-  background-color: #def2f1;
+  font-size: 15px;
 }
+}
+
 </style>

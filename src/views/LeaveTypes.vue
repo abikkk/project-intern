@@ -1,27 +1,26 @@
 <template>
     <div id="leavetypes-body">
-        <v-data-table :headers="header" :items="leaves" class="tables">
-            <template slot="items" slot-scope="prop">
-                <td> {{ prop.item.leave_type_id }} </td>
-                <td> {{ prop.item.leave_type }} </td>
-                <td> {{ prop.item.total_days }} </td>
-            </template>
-        </v-data-table>
+            <h2>Available Leave Types</h2>
+            <v-data-table :headers="header" :items="leaves" class="tables">
+                <template slot="items" slot-scope="prop">
+                    <td> {{ prop.item.leave_type_id }} </td>
+                    <td> {{ prop.item.leave_type }} </td>
+                    <td> {{ prop.item.total_days }} </td>
+                </template>
+            </v-data-table>
 
-        <v-card class="cards">
             <v-card-title>
                <h2> New Leave Type form: </h2></v-card-title>
             <v-card-text v-model="form">
                 <v-text-field v-model="leave_type_name" :rules="[rules.required]" label="New Leave Type" required/>
-                <v-select v-model="select" :items="options" required/>
-                <v-text-field v-model="select" :rules="[rules.required]" label="Initial Days for new leave type" readonly required/>
+                <v-select v-model="select_days" :items="options" required/>
+                <!-- <v-text-field v-model="select_days" :rules="[rules.required]" label="Initial Days for new leave type" readonly required/> -->
                 <v-card-actions>
                     <v-btn @click="refresh()" color="orange">Reset</v-btn>
                     <v-divider/>
                     <v-btn :disabled="!form" @click="submit()" color="primary">Submit</v-btn>
                 </v-card-actions>
             </v-card-text>
-        </v-card>
     </div>
 </template>
 
@@ -41,7 +40,7 @@ export default {
             {text:'Days',value:'total_days'}
         ],
         leave_totaldays:'',
-        select:null,
+        select_days:null,
         options: [
         { value: null, text: 'Please select number of days' },
         { value: '1', text: '1' },
@@ -108,13 +107,13 @@ export default {
             method: 'post',
             data:{
                 'leave_type':this.leave_type_name,
-                'total_days':this.leave_totaldays
+                'total_days':this.select_days
                 },
             url: baseUrl + "attend/v1/types-of-leave/",
             headers: {Authorization: localStorage.getItem('token')}
           }).then(response => {
             console.log(response)
-            this.mounted()
+            location.reload()
         })
         .catch(function(error){
           console.log('error: error in getLeave.' + error)
@@ -125,7 +124,5 @@ export default {
 </script>
 
 <style>
-#leavetypes-body{
-    /* margin-top: 2.5% */
-}
+
 </style>

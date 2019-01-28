@@ -6,7 +6,7 @@
       <h2><u>Login</u></h2>
       <br>
       <div id="login-form">
-        <v-text-field v-model="name" label="Username or Email-ID" required/>
+        <v-text-field v-model="name" label="Username" required/>
         <br>
         <v-text-field v-model="password" type="password" label="Password" required/>
       </div>
@@ -14,10 +14,9 @@
       <div name="options" id="password_options">
         <p id="p_error"/>
         <router-link to="/Password-Reset">Reset your password?</router-link>
-        <v-label v-model="labelpass"></v-label>
       </div>
       <br>
-      <button id="btn" @click="clear()">Cancel</button>
+      <button id="btn" @click="cancel()">Cancel</button>
       <button class="submit-btn" id="btn" @click="login()" type="submit"><span>Login</span></button>
     </div>      
   </div>
@@ -31,8 +30,7 @@ export default {
   name: 'login',
   data: () => ({
       name: '',
-      password: '',
-      labelpass:''
+      password: ''
   }),
   methods:{
     submit () {
@@ -59,11 +57,11 @@ export default {
         .catch(function (error) {
           if(error==='Network Error'){
             console.log('error: error in login.' + error)
-            document.getElementById('wrong_password').innerHTML='Network Error'
+            document.getElementById('p_error').innerHTML='Network Error'
           }
           else{
             console.log('error: error in login.' + error)
-            document.getElementById('wrong_password').innerHTML='Your username and password did not match. Try again.'
+            document.getElementById('p_error').innerHTML='Your username and password did not match. Try again.'
           }
         })
       },
@@ -72,9 +70,8 @@ export default {
         this.$router.push('/Home')
       },
       */
-      clear () {
-        this.name = ''
-        this.password = ''
+      cancel() {
+        close()
       }
   }
 };

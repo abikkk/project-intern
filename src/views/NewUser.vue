@@ -1,9 +1,8 @@
 <template>
   <div id="newuser-body">
-    <h1>Create New Account</h1>
-    <br>
-    <v-card class="cards" id="card-form">
-    <h3>Fill up the form with your correct and valid informations:</h3> <br>
+      <h1>Create New Account</h1>
+      <br>
+      <h3>Fill up the form with your correct and valid informations:</h3> <br>
       <v-form ref="form" v-model="form">
         <v-text-field v-model="fname" :rules="nameRules" label="First Name" required/>
         <v-text-field v-model="lname" :rules="nameRules" label="Last Name" required/>
@@ -16,7 +15,7 @@
           <v-radio label="Non-binary" value="2" required/>
         </v-radio-group>
         
-<!--calender -->
+        <!--calender -->
         <v-layout row wrap>
           <v-flex xs12 sm6 md4>
             <v-menu
@@ -78,7 +77,7 @@
         </v-checkbox>
       </v-form>
 
-<!--Terms and policies dailog box -->
+      <!--Terms and policies dailog box -->
       <v-dialog v-model="dialog" absolute id="dailog-box" persistent>
         <v-card id="dailog-card">
           <v-card-title>Legal</v-card-title>
@@ -103,7 +102,6 @@
       <v-btn color="primary" @click="back()">Home</v-btn>
       <v-btn flat @click="$refs.form.reset()">Clear</v-btn>
       <v-btn :disabled="!form" :loading="isLoading" color="primary" @click="submit()">Submit</v-btn>
-  </v-card>
 
   <router-view/>
 </div>
@@ -178,6 +176,7 @@ import {baseUrl} from '../utils/misc'
             'last_name':this.lname,
             'address':this.address,
             'contact':this.contact,
+            'gender':this.gencheck,
             'email':this.email,
             'date_of_birth':this.date,
             'branch':this.select_branch,
@@ -248,7 +247,6 @@ import {baseUrl} from '../utils/misc'
 <style>
 #radio-gen-lbl{
   font-size: 15px;
-  /* margin: .8%; */
 }
 
 #card-form{

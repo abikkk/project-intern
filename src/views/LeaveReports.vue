@@ -6,22 +6,58 @@
                     <v-tab ripple>Pending</v-tab>
                     <v-tab-item>
                         <v-card-text>
-                                <h4>Pending reports</h4>
-                                <v-data-table :headers="header" :items="pendReports" class="tables">
-                                        <template slot="items" slot-scope="prop">
-                                            <!-- <v-checkbox :input-value="prop.selected"  primary hide-details/> -->
-                                            <td>{{ prop.item.username.username }}</td>
-                                            <td>{{ prop.item.submission }}</td>
-                                            <td>{{ prop.item.description }}</td>
-                                            <td>{{ prop.item.datefrom }}</td>
-                                            <td>{{ prop.item.dateto }}</td>
-                                            <td>{{ prop.item.status }}</td>
-                                            <td>{{ prop.item.leavetype }}</td>
-                                            <td><v-btn flat color="orange" @click="denied_response(prop.item.leave_id)">Reject</v-btn></td>
-                                            <td><v-btn flat color="primary" @click="approved_response(prop.item.leave_id)">Approve</v-btn></td>
-                                        </template>
-                                </v-data-table>
-                            </v-card-text>
+                            <h4>Pending reports</h4>
+                            <v-data-table :headers="header" :items="pendReports" class="tables">
+                                    <template slot="items" slot-scope="prop">
+                                        <!-- <v-checkbox :input-value="prop.selected"  primary hide-details/> -->
+                                        <td>{{ prop.item.username.username }}</td>
+                                        <td>{{ prop.item.submission }}</td>
+                                        <td>{{ prop.item.description }}</td>
+                                        <td>{{ prop.item.datefrom }}</td>
+                                        <td>{{ prop.item.dateto }}</td>
+                                        <!-- <td>{{ prop.item.status }}</td> -->
+                                        <td>{{ prop.item.leavetype }}</td>
+                                        <td><v-btn flat color="orange" @click="denied_response(prop.item.leave_id)">Reject</v-btn></td>
+                                        <td><v-btn flat color="primary" @click="approved_response(prop.item.leave_id)">Approve</v-btn></td>
+                                    </template>
+                            </v-data-table>
+                        </v-card-text>
+                    </v-tab-item>
+
+                    <v-tab ripple>Accepted</v-tab>
+                    <v-tab-item>
+                        <v-card-text>
+                            <h4>Approved reports</h4>
+                            <v-data-table :headers="header" :items="appReports" class="tables">
+                                <template slot="items" slot-scope="prop">
+                                    <td>{{ prop.item.username.username }}</td>
+                                    <td>{{ prop.item.submission }}</td>
+                                    <td>{{ prop.item.description }}</td>
+                                    <td>{{ prop.item.datefrom }}</td>
+                                    <td>{{ prop.item.dateto }}</td>
+                                    <!-- <td>{{ prop.item.status }}</td> -->
+                                    <td>{{ prop.item.leavetype }}</td>
+                                </template>
+                            </v-data-table>
+                        </v-card-text>
+                    </v-tab-item>
+
+                    <v-tab ripple>Rejected</v-tab>
+                    <v-tab-item>
+                        <v-card-text>
+                            <h4>Rejected reports</h4>
+                            <v-data-table :headers="header" :items="rejReports" class="tables">
+                                <template slot="items" slot-scope="prop">
+                                    <td>{{ prop.item.username.username }}</td>
+                                    <td>{{ prop.item.submission }}</td>
+                                    <td>{{ prop.item.description }}</td>
+                                    <td>{{ prop.item.datefrom }}</td>
+                                    <td>{{ prop.item.dateto }}</td>
+                                    <!-- <td>{{ prop.item.status }}</td> -->
+                                    <td>{{ prop.item.leavetype }}</td>
+                                </template>
+                            </v-data-table>
+                        </v-card-text>
                     </v-tab-item>
                     
                     <v-tab ripple>All</v-tab>
@@ -29,7 +65,7 @@
                         <v-card flat>
                             <v-card-text>
                                 <h4>All reports</h4>
-                                <v-data-table :headers="header" :items="reports" class="tables">
+                                <v-data-table :headers="header_all" :items="reports" class="tables">
                                         <template slot="items" slot-scope="prop">
                                             <td>{{ prop.item.username.username }}</td>
                                             <td>{{ prop.item.submission }}</td>
@@ -42,45 +78,6 @@
                                 </v-data-table>
                             </v-card-text>
                         </v-card>
-                    </v-tab-item>
-
-                    <v-tab ripple>Accepted</v-tab>
-                    <v-tab-item>
-                        <v-card-text>
-                                <h4>Approved reports</h4>
-                                <v-data-table :headers="header" :items="appReports" class="tables">
-                                        <template slot="items" slot-scope="prop">
-                                            <td>{{ prop.item.username.username }}</td>
-                                            <td>{{ prop.item.submission }}</td>
-                                            <td>{{ prop.item.description }}</td>
-                                            <td>{{ prop.item.datefrom }}</td>
-                                            <td>{{ prop.item.dateto }}</td>
-                                            <td>{{ prop.item.status }}</td>
-                                            <td>{{ prop.item.leavetype }}</td>
-                                        </template>
-                                </v-data-table>
-                                <v-card-actions>
-
-                                </v-card-actions>
-                            </v-card-text>
-                    </v-tab-item>
-
-                    <v-tab ripple>Rejected</v-tab>
-                    <v-tab-item>
-                        <v-card-text>
-                                <h4>Rejected reports</h4>
-                                <v-data-table :headers="header" :items="rejReports" class="tables">
-                                        <template slot="items" slot-scope="prop">
-                                            <td>{{ prop.item.username.username }}</td>
-                                            <td>{{ prop.item.submission }}</td>
-                                            <td>{{ prop.item.description }}</td>
-                                            <td>{{ prop.item.datefrom }}</td>
-                                            <td>{{ prop.item.dateto }}</td>
-                                            <td>{{ prop.item.status }}</td>
-                                            <td>{{ prop.item.leavetype }}</td>
-                                        </template>
-                                </v-data-table>
-                            </v-card-text>
                     </v-tab-item>
             </v-tabs>
         </div>
@@ -95,13 +92,21 @@ export default {
     name:'Leave-Reports',
     data:()=>({
         reports:[],
-        header:[
+        header_all:[
             {text:'Username',value:'username'},
             {text:'Sub. Date',value:'submission'},
             {text:'Description',value:'description'},            
             {text:'From',value:'datefrom'},
             {text:'To',value:'dateto'},
             {text:'Status',value:'status'},
+            {text:'L. Type',value:'leavetype'},
+        ],
+        header:[
+            {text:'Username',value:'username'},
+            {text:'Sub. Date',value:'submission'},
+            {text:'Description',value:'description'},            
+            {text:'From',value:'datefrom'},
+            {text:'To',value:'dateto'},
             {text:'L. Type',value:'leavetype'},
         ],
         pendReports:[],
@@ -174,7 +179,7 @@ export default {
                 report_read.datefrom=report[index].date_from
                 report_read.dateto=report[index].date_to
                 report_read.status=report[index].status
-                report_read.leavetype=report[index].types_of_leave
+                report_read.leavetype=report[index].types_of_leave.leave_type
                 console.log('success: all report imported')
                 this.reports.push(report_read)
             }
@@ -189,7 +194,7 @@ export default {
                 report_read.datefrom=pendReport[index].date_from
                 report_read.dateto=pendReport[index].date_to
                 report_read.status=pendReport[index].status
-                report_read.leavetype=pendReport[index].types_of_leave
+                report_read.leavetype=pendReport[index].types_of_leave.leave_type
                 if (report_read.status.toLowerCase()==='pending') {
                     console.log('success: pending report imported')
                     console.log(pendReport)
@@ -206,7 +211,7 @@ export default {
                 report_read.datefrom=appReport[index].date_from
                 report_read.dateto=appReport[index].date_to
                 report_read.status=appReport[index].status
-                report_read.leavetype=appReport[index].types_of_leave
+                report_read.leavetype=appReport[index].types_of_leave.leave_type
                 if (report_read.status.toLowerCase()==='approved') {
                     console.log('success: approved report imported')
                     this.appReports.push(report_read)
@@ -223,7 +228,7 @@ export default {
                 report_read.datefrom=rejReport[index].date_from
                 report_read.dateto=rejReport[index].date_to
                 report_read.status=rejReport[index].status
-                report_read.leavetype=rejReport[index].types_of_leave
+                report_read.leavetype=rejReport[index].types_of_leave.leave_type
                 if (report_read.status.toLowerCase()==='rejected') {
                     console.log('success: rejected report imported')
                     this.rejReports.push(report_read)
@@ -236,12 +241,5 @@ export default {
 </script>
 
 <style lang="scss">
-#leavereports-body{
-    // margin-top: 2.5%;
-    width: 90%;
-    align-self: center;
-    #report_table{
-        width: 100%;
-    }
-}
+
 </style>

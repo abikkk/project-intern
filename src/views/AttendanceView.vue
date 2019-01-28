@@ -1,9 +1,8 @@
 <template>
     <div id="attendview-body">
-        <h2>Attendance Report</h2>
+        <h2>Attendance Report for current user:</h2>
             <v-data-table :headers="header" :items="attend_report" class="tables" >
                 <template slot="items" slot-scope="prop">
-                    <td>{{ prop.item.user.username }}</td>
                     <td>{{ prop.item.check_in }}</td>
                     <td>{{ prop.item.check_out }}</td>
                     <td>{{ prop.item.check_in_date }}</td>
@@ -24,10 +23,9 @@ export default {
     data:()=>({
         attend_report:[],attend_report_temp:[],
         header:[
-            {text:'Attendance Report', sortable: false, value: 'user'},
-            {text:'Check in time',value:'check_in'},
-            {text:'Check out time',value:'check_out'},
-            {text:'Check in date',value:'check_in_date'},
+            {text:'Check in time (hr.min.sec)',value:'check_in'},
+            {text:'Check out time (hr.min.sec)',value:'check_out'},
+            {text:'Check in date (yyyy-mm-dd)',value:'check_in_date'},
         ]
     }),
     methods:{
@@ -55,7 +53,5 @@ export default {
 </script>
 
 <style lang="scss">
-#attendview-body{
-    // margin-top: 2.5%;
-}
+
 </style>

@@ -36,11 +36,6 @@ export default new Router({
             component:()=>import('./views/LeaveRequests.vue'),
           },
           {
-            path: '/Password-Reset',
-            name: 'Password-Reset',
-            component: ()=>import('./views/PasswordReset.vue'),
-          },
-          {
             path: '/Leave-Reports',
             name: 'Leave-Reports',
             component: ()=>import('./views/LeaveReports.vue'),
@@ -71,9 +66,9 @@ export default new Router({
             component: ()=>import('./views/AccountUpdate.vue'),
           },
           {
-            path: '/Users-Delete',
-            name: 'Users-Delete',
-            component: ()=>import('./views/DeleteUsers.vue'),
+            path: '/Users',
+            name: 'Users',
+            component: ()=>import('./views/Users.vue'),
           },
           {
             path: '/Group-Branch',
@@ -84,6 +79,11 @@ export default new Router({
             path: '/Leave-Types',
             name: 'Leave-Types',
             component: ()=>import('./views/LeaveTypes.vue'),
+          },
+          {
+            path: '/Try',
+            name: 'Try',
+            component: ()=>import('./views/Try.vue'),
           }
         ],
       },
@@ -99,6 +99,11 @@ export default new Router({
           path:'/Login',
           name:'Login',
           component:()=>import ('./views/Login.vue'),
+        },
+        {
+          path: '/Password-Reset',
+          name: 'Password-Reset',
+          component: ()=>import('./views/PasswordReset.vue'),
         },
         {
           path: '/New-Password/*',

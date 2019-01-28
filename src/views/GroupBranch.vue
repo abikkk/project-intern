@@ -1,5 +1,6 @@
 <template>
     <div id="editgroupbranch-body">
+        <h2>Groups and Branches</h2>
         <v-tabs v-model="active" color="tabs" slider-color="blue">
             <v-tab ripple>Groups</v-tab>
             <v-tab-item>
@@ -13,13 +14,12 @@
                                 </template>
                         </v-data-table>
                     </v-card-text>
-                </v-card>
-                <br>
+                    <br>
                     <v-form v-model="group_add">
                         <h2>Add new group:</h2>
                         <v-text-field v-model="new_groupname" :rules="[rules.required]" label="New Group name" required/>
                         <h3>Available Groups</h3>
-                        <v-data-table title="Available Groups" :headers="header_permission" :items="all_permissions" id="permissions_table" class="tables">
+                        <v-data-table title="Available Groups" :headers="header_permission" :items="all_permissions" class="tables">
                                 <template slot="items" slot-scope="prop">
                                     <td> {{prop.item.id}} </td>
                                     <td> {{prop.item.name}} </td>
@@ -31,6 +31,7 @@
                         <v-btn @click="reset_groups()">Clear Added Groups</v-btn>
                         <v-btn :disabled="!group_add" @click="addGroup()" primary>Add Group</v-btn>
                     </v-form>
+                </v-card>
             </v-tab-item>
 
             <v-tab ripple>Branch</v-tab>
@@ -49,7 +50,7 @@
                 <v-divider/>
                 <v-form v-model="branch_add">
                     <v-text-field v-model="new_branchname" label="New Branch name" required/>
-                    <v-btn :disabled="!group_add" @click="addBranch" primary>Add Branch</v-btn>
+                    <v-btn :disabled="!new_branchname" @click="addBranch" primary>Add Branch</v-btn>
                 </v-form>
             </v-tab-item>
         </v-tabs>
@@ -201,14 +202,5 @@ export default {
 </script>
 
 <style>
-#editgroupbranch-delete{
-    /* margin-top: 2.5% */
-}
 
-#permissions_table{
-    width: 75%;
-    margin: 1%;
-    padding: .5%;
-    float: left;
-}
 </style>
