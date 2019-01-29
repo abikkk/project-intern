@@ -1,6 +1,6 @@
 <template>
     <div id="leavereports-body">
-        <h2>Leave Reports</h2>
+        <h1>Leave Reports</h1>
         <div id="leavereports">
             <v-tabs v-model="active" color="tabs" slider-color="blue">
                     <v-tab ripple>Pending</v-tab>

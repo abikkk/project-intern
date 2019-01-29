@@ -1,5 +1,6 @@
 <template>
   <div id="deleteusers-body">
+      <h1>Users:</h1>
     <v-tabs v-model="active">
         <v-tab>All Users</v-tab>
         <v-tab-item>

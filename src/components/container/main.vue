@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi|Barlow+Semi+Condensed|Didact+Gothic|Indie+Flower|KoHo|Kosugi+Maru|Krub|Luckiest+Guy|Marck+Script|Merienda|Nanum+Gothic|Nunito|Pontano+Sans|Quattrocento+Sans|Questrial');
+
 html,body{
   height: 100%;
   transition: .3s
@@ -31,10 +33,13 @@ html,body{
   opacity: 0;
 }
 
+h1,h2,h3,h4{
+  font-family: 'Questrial', sans-serif;
+  /* font-family: 'Indie Flower', cursive; */
+}
+
 .main-container{
-  font-family:sans-serif;
-  font-size: 12px;
-  /* background-color: #77a6f7; */
+  font-family: 'Nunito', sans-serif;
   background-color: whitesmoke;
   height: 100%; 
 }

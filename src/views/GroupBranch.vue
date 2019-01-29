@@ -1,6 +1,6 @@
 <template>
     <div id="editgroupbranch-body">
-        <h2>Groups and Branches</h2>
+        <h1>Groups and Branches</h1>
         <v-tabs v-model="active" color="tabs" slider-color="blue">
             <v-tab ripple>Groups</v-tab>
             <v-tab-item>

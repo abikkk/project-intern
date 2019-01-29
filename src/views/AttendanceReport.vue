@@ -1,6 +1,6 @@
 <template>
   <div id="attendreport-body">
-    <h2>Overall Attendance Report:</h2>
+    <h1>Overall Attendance Report:</h1>
     <v-tabs v-model="form">
       <!-- overall attendance report -->
       <v-tab>
@@ -145,7 +145,7 @@ import { baseUrl } from '../utils/misc';
 export default {
   name:'Attendance-Report',
   data:()=>({
-    form:false,
+    form:'',
     attendreport:[],
     selected_attendreport:[],
     headers:[

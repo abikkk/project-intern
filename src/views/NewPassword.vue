@@ -1,7 +1,7 @@
 <template>
     <div id="newpassword-body">
             <v-card-title>
-                <h2>New Password:</h2>
+                <h1>New Password:</h1>
             </v-card-title>
             <v-card-text>
                 Enter your new password:

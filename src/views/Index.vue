@@ -236,7 +236,7 @@ export default {
           document.getElementById('nav_om').hidden=false
           document.getElementById('admin_om').hidden=false
           //BODY WIDTH FOR THE MAIN-CONTAINER
-          document.getElementById('main-container-body').style.width='72%'
+          document.getElementById('main-container-body').style.width='70%'
           //storing manager or admin for the current user
           localStorage.setItem('manageroradmin',this.profile_view.groups[0].name.toLowerCase())
           console.log('group: ' + this.profile_view.groups[0].name.toLowerCase())
@@ -246,7 +246,7 @@ export default {
           document.getElementById('nav_admin').hidden=false
           document.getElementById('admin_om').hidden=false
           //BODY WIDTH FOR THE MAIN-CONTAINER
-          document.getElementById('main-container-body').style.width='72%'
+          document.getElementById('main-container-body').style.width='70%'
           //storing manager or admin for the current user
           localStorage.setItem('manageroradmin',this.profile_view.groups[0].name.toLowerCase())
         }

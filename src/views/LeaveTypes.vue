@@ -1,6 +1,6 @@
 <template>
     <div id="leavetypes-body">
-            <h2>Available Leave Types</h2>
+            <h1>Available Leave Types</h1>
             <v-data-table :headers="header" :items="leaves" class="tables">
                 <template slot="items" slot-scope="prop">
                     <td> {{ prop.item.leave_type_id }} </td>

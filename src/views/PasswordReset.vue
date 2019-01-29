@@ -1,6 +1,6 @@
 <template>
 <div id="password_reset">
-  <h3>Send Reset Password Email</h3>
+  <h1>Send Reset Password Email</h1>
     <v-text-field v-model="reset_email" :rules="[rules.required,rules.email]" label="Enter your email ID" required/>
     <p id="p_error"/>
     <v-card-actions>

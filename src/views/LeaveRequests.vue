@@ -1,6 +1,6 @@
 <template>
     <div id="leaverequests-body">
-            <h2>Submitted Leave Requests</h2>
+            <h1>Submitted Leave Requests</h1>
             <v-data-table :headers="header" :items="reports" class="tables">
                 <template slot="items" slot-scope="prop">
                     <td> {{prop.item.leave_id}} </td>

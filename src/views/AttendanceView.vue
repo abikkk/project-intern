@@ -1,6 +1,6 @@
 <template>
     <div id="attendview-body">
-        <h2>Attendance Report for current user:</h2>
+        <h1>Attendance Report for current user:</h1>
             <v-data-table :headers="header" :items="attend_report" class="tables" >
                 <template slot="items" slot-scope="prop">
                     <td>{{ prop.item.check_in }}</td>
