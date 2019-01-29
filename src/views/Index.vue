@@ -102,7 +102,6 @@ export default {
   mounted(){
     this.getProfile() 
     this.getUserProfiles() 
-    // let tempget=null
     this.getAttendToday(localStorage.getItem('user_id'))
   },
   data:()=>({
