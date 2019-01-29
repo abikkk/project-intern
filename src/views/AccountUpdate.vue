@@ -4,12 +4,17 @@
     <br>
     <h3>Change your informations:</h3> <br>
       <v-form ref="form" v-model="form">
+        <v-text-field v-model="username" :rules="usernameRules" label="UserName" required/>
         <v-text-field v-model="fname" :rules="nameRules" label="First Name" required/>
         <v-text-field v-model="lname" :rules="nameRules" label="Last Name" required/>
+        <v-radio-group v-model="gencheck" :rules="[rules.genrequired]" label="Select your gender:" required>
+          <v-radio label="Male" value="Male" required/>
+          <v-radio label="Female" value="Female" required/>
+          <v-radio label="Non-binary" value="Non-binary" required/>
+        </v-radio-group>
         <v-text-field v-model="address" :rules="[rules.nullnotallowed,rules.required]" label="Address" required/>
         <v-text-field v-model="contact" :rules="[rules.nullnotallowed,rules.required]" label="Contact" required/>
         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required/>
-        <v-text-field v-model="username" :rules="usernameRules" label="UserName" required/>
       </v-form>
       <br>
       <v-card-actions>
@@ -49,6 +54,7 @@ import {baseUrl} from '../utils/misc'
             this.lname=this.profile_view.last_name
             this.contact=this.profile_view.contact
             this.username=this.profile_view.username
+            this.gencheck=this.profile_view.gender
             this.current_user_id=this.profile_view.id
             this.address=this.profile_view.address
             this.email=this.profile_view.email
@@ -106,6 +112,7 @@ import {baseUrl} from '../utils/misc'
             'username':this.username,
             'first_name':this.fname,
             'last_name':this.lname,
+            'gender':this.gencheck,
             'address':this.address,
             'contact':this.contact,
             'email':this.email,
@@ -137,6 +144,7 @@ import {baseUrl} from '../utils/misc'
       username:'',
       password:'',
       address:'',
+      gencheck:'',
       contact:'',
       email:'',
       name: '',
@@ -145,10 +153,10 @@ import {baseUrl} from '../utils/misc'
       profile_view:{},
       current_user_id:'',
       nameRules: [
-        v => !!v || 'Your names cannot be Empty... Seriously?'
+        v => !!v || 'Names cannot be left empty.'
       ],
       emailRules: [
-        v => !!v || 'Must have an Email Address...Google? Yahoo? Something?',
+        v => !!v || 'Must have an Email Address. Google? Yahoo? Something?',
         v => /.+@.+/.test(v) || 'E-mail not valid, try again.'
       ],
       usernameRules:[
@@ -156,12 +164,11 @@ import {baseUrl} from '../utils/misc'
         //v => v.length<=10 || 'Username too long, try something shorter.'
       ],
       rules:{
-        required: v => !!v || 'Cannot be Empty... Seriously?',
-        agreerequired: v=> !!v || 'Must agree to terms and policies before signing up.',
-        genrequired:v=> !!v || 'Select any one.',
-        //fnamerule: v => v.length <= 10 || 'Thats a long fist name bruh...',
-        //lnamerule: v => v.length <= 15 || 'Thats a long last name bruh...',
-        nullnotallowed: v => !!v || 'Must provide something...'
+        required: v => !!v || 'Cannot be left empty',
+        genrequired:v=> !!v || 'please select any one.',
+        fnamerule: v => v.length <= 10 || 'First name cannot be more than 10 characters',
+        lnamerule: v => v.length <= 15 || 'First name cannot be more than 15 characters',
+        nullnotallowed: v => !!v || 'Cannot be left empty'
       }
     })
   }

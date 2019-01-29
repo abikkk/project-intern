@@ -102,7 +102,7 @@ a {
   width: 40%;
   text-align: center;
   background-color: #def2f1 ;
-  box-shadow: 5px 5px 2px #5da2d5;
+  box-shadow: 2px 2px 1px grey;
   padding:3%;
   padding-top: .5%;
   border-radius: 8%;
@@ -116,7 +116,7 @@ a {
   float: left;
   border-radius: 50%;
   animation: fadeIn 5s ease;
-  box-shadow: 5px 0px 2px #5da2d5;
+  box-shadow: 5px 0px 2px grey;
 }
 
 .form-item{

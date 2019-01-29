@@ -35,7 +35,7 @@ html,body{
   font-family:sans-serif;
   font-size: 12px;
   /* background-color: #77a6f7; */
-  background-color: #84ceeb;
+  background-color: whitesmoke;
   height: 100%; 
 }
 </style>

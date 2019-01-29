@@ -1,6 +1,6 @@
 <template>
   <div id="deleteusers-body">
-    <v-tabs>
+    <v-tabs v-model="active">
         <v-tab>All Users</v-tab>
         <v-tab-item>
             <v-card class="cards">
@@ -8,7 +8,7 @@
                 <v-data-table class="tables" :headers="header_all" :items="user_profiles">
                     <template slot="items" slot-scope="prop">
                         <td> {{ prop.item.user_id }} </td>
-                        <td> {{ prop.item.user }} </td>
+                        <td @click="search_tab(prop.item.user)"> {{ prop.item.user }} </td>
                         <td> {{ prop.item.fname }} </td>
                         <td> {{ prop.item.group }} </td>
                         <td> {{prop.item.branch}} </td>
@@ -80,6 +80,7 @@ export default {
     data:()=>({
         form:true,/*for validating all fields in Submit button*/
         isLoading:false,/*Submit button initialization */
+        active:null,
         fname: '',
         lname: '',
         username:'',
@@ -137,6 +138,7 @@ export default {
                 return false;
             }
         },
+
         //UPDATE USER'S GROUP
         update(){
             Axios({
@@ -156,6 +158,14 @@ export default {
                 console.log('error: error in update()' + error)
             })
         },
+
+        //SWITCHING TABS
+        search_tab(passusername){
+            const active = parseInt(this.active)
+            this.active=2
+            this.searchProfile(passusername)
+        },
+
         //SEARCH USERS
         searchProfile(currentusername){
         Axios({
@@ -181,6 +191,7 @@ export default {
             console.log('error: error in getProfile' + error)
         })
         },
+
         //GETTING USER PROFILES
         getUserProfiles(){
             Axios({
@@ -206,15 +217,16 @@ export default {
                 // profiles_read.gender=userprofiles[index].gender
                 profiles_read.branch=userprofiles[index].branch.branch_name
                 profiles_read.email=userprofiles[index].email
-                if(profiles_read.user.toLowerCase()==='admin' && profiles_read.user===localStorage.getItem('username')){
+                if(profiles_read.user===localStorage.getItem('username')){
                     //do nothing
                 }
                 else{
-                this.user_profiles.push(profiles_read)
+                    this.user_profiles.push(profiles_read)
                 }
             }
             console.log('success: user profiles import success.')
         },
+
         //GETTING GROUPS
         getGroups (){
             Axios({
@@ -237,6 +249,7 @@ export default {
             this.group_name.push(group)
             }
         },
+
         //GETTING BRANCHES
         getBranches (){
         Axios({
@@ -259,6 +272,7 @@ export default {
             this.branch_name.push(branch)
             }
         },
+
         //DELETE USER
         delete_user(userid){
             Axios({

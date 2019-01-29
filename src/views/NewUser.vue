@@ -10,9 +10,9 @@
         <v-text-field v-model="contact" :rules="[rules.nullnotallowed,rules.required]" label="Contact" required/>
         
         <v-radio-group v-model="gencheck" :rules="[rules.genrequired]" label="Select your gender:" required>
-          <v-radio label="Male" value="0" required/>
-          <v-radio label="Female" value="1" required/>
-          <v-radio label="Non-binary" value="2" required/>
+          <v-radio label="Male" value="Male" required/>
+          <v-radio label="Female" value="Female" required/>
+          <v-radio label="Non-binary" value="Non-binary" required/>
         </v-radio-group>
         
         <!--calender -->
@@ -97,7 +97,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
+      <p id="p_error"/>
       <br>
       <v-btn color="primary" @click="back()">Home</v-btn>
       <v-btn flat @click="$refs.form.reset()">Clear</v-btn>
@@ -191,6 +191,7 @@ import {baseUrl} from '../utils/misc'
           location.reload()
         })
         .catch(function (error) {
+          document.getElementById('p_error').innerHTML=error + '/n Some of your credentials seems to have been already in another account, try changing you username or email.'
           console.log('error: error in submit.' + error);
         })
       },

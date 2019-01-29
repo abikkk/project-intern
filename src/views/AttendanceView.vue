@@ -38,9 +38,7 @@ export default {
                 .then(respo=>{
                     this.attend_report_temp=respo.data
                     for(let index in this.attend_report_temp){
-                        if(this.attend_report_temp[index].user.username===localStorage.getItem('username')){
-                            this.attend_report.push(this.attend_report_temp[index])
-                        }
+                        this.attend_report.push(this.attend_report_temp[index])
                     }
                     console.log(this.attend_report)
                 })

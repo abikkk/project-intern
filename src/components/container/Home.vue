@@ -163,7 +163,7 @@
   padding: .5%;
   color:initial;
   float: left;
-  width: 95%;
+  width: 82%;
   transition: .3s;
   height: fit-content ;
   border-left-style: solid;
@@ -175,25 +175,21 @@
 /*OM navigation bar(menu) section*/
 header{
   z-index: 1;
-  background-color: #5ab9ea;
+  // background-color: #5ab9ea;
   border-width: 1px;  
   position: relative;
-  box-shadow: 0px 2px 2px #265077;
-  width: 100%;
+  box-shadow: 0px 1px 1px grey;
+  align-content: center;
+  text-align: center;
+  // width: 100%;
   font-size: 20px; 
   transition:.3s;
   #nav{
     width: 100%;
-    text-align: center;
   }
-}
-header:hover{
-  box-shadow: 0px 5px 3px #265077;
 }
 #nav-td{
   border-radius: 3%;
-  padding-top: 1%;
-  padding-bottom: 1%;
   transition: .3s;
 }
 #nav-td:hover{
@@ -201,16 +197,9 @@ header:hover{
   }
 
 #nav-item{
+  padding: 1%;
   text-decoration: none;
   color: inherit;
-}
-
-#om-nav{
-  height: 80vh;
-} 
-
-#admin-nav{
-  height: 40vh;
 }
 
 #nav-bars{
@@ -219,9 +208,9 @@ header:hover{
   height: 100%;
   margin-left:  0.3%;
   float: left;
-  background-color: #def2f1 ;
-  box-shadow: 2px 2px 1px #265077;
-  font-size: 18px;
+  font-size: 15px;
+  background-color: whitesmoke ;
+  box-shadow: 1px 1px 1px gray;
   border-radius: 1%;
   transition: .3s;
 }
