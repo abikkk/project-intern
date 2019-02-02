@@ -80,7 +80,17 @@
             <v-text-field v-model="contact" label="Contact" readonly/>
             <v-text-field v-model="email" label="E-mail" readonly/>
             <v-text-field v-model="current_group" label="Current Group" readonly/>
-        </v-form>        
+        </v-form>
+        <div id="attendview-body">
+        <h1>Attendance Report for current user:</h1>
+          <v-data-table :headers="headers" :items="attend_report" class="tables" >
+              <template slot="items" slot-scope="prop">
+                  <td>{{ prop.item.check_in }}</td>
+                  <td>{{ prop.item.check_out }}</td>
+                  <td>{{ prop.item.check_in_date }}</td>
+              </template>
+          </v-data-table>
+        </div>
         </v-tab-item>
       </v-tabs>
     </div>
@@ -115,13 +125,19 @@ export default {
     user_profiles:[],
     profiles:{},
     today_attend:[],
+    attend_report:[],attend_report_temp:[],
     attendance_card:{}, attendance_card_temp:{},
     headers_all_attend:[
       {text:'User',value:'user.username'},{text:'Check-in time (hr.min.sec)',value:'check_in'},{text:'Check-out time (hr.min.sec)',value:'check_out'},{text:'Check-in date',value:'check_in_date'}
     ],
     headers_user_attend:[
       {text:'User',value:'user.username'},{text:'Check-in time (hr.min.sec)',value:'check_in'},{text:'Check-out time (hr.min.sec)',value:'check_out'},{text:'Check-in date',value:'check_in_date'}
-    ]
+    ],
+    headers:[
+      {text:'In time(hr.min.sec)',value:'check_in'},
+      {text:'Out time(hr.min.sec)',value:'check_out'},
+      {text:'Check in date(yyyy-mm-dd)',value:'check_in_date'},
+    ],
   }),
   methods:{
     //SEARCH USER
@@ -144,7 +160,7 @@ export default {
         this.email=this.selected_user.email
         this.branch_name=this.selected_user.branch.branch_name
         this.current_group=this.selected_user.groups[0].name
-        this.tab_change(2)
+        this.getUserAttendReport(this.uid)
       })
     },
 
@@ -259,6 +275,26 @@ export default {
         console.log('error: error in getProfile.' + error)
       })
     },
+
+    //GETTING INDIVIDUAL ATTENDANCE REPORT FOR USERS
+    getUserAttendReport(userid){
+      Axios({
+          methods:'get',
+          url: baseUrl + 'attend/v1/view-user-attendance/' + userid,
+          headers: {Authorization: localStorage.getItem('token')}
+      })
+          .then(respo=>{
+              this.attend_report_temp=respo.data
+              for(let index in this.attend_report_temp){
+                  this.attend_report.push(this.attend_report_temp[index])
+              }
+              console.log(this.attend_report)
+            this.tab_change(2)
+          })
+          .catch(function (error){
+              console.log('error: error in getUserAttendReport module' + error)
+          })
+      },
 
     //GETTING CURRENT USER ATTEND STAT FOR TODAY
     getAttendToday(userid){

@@ -21,7 +21,7 @@
           <v-flex xs12 sm6 md4>
             <v-menu
               :close-on-content-click="false"
-              v-model="calenderfrom"
+              v-model="calenderfroom"
               :nudge-right="40"
               lazy
               transition="scale-transition"
@@ -35,7 +35,7 @@
                 label="Pick your Start Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_1" @input="calenderview = false"/>
+              <v-date-picker v-model="date_1" @input="calenderfroom = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
@@ -45,7 +45,7 @@
           <v-flex xs12 sm6 md4>
             <v-menu
               :close-on-content-click="false"
-              v-model="calenderto"
+              v-model="calendertoo"
               :nudge-right="40"
               lazy
               transition="scale-transition"
@@ -59,7 +59,7 @@
                 label="Pick your End Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_2" @input="calenderview = false"/>
+              <v-date-picker v-model="date_2" @input="calendertoo = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
@@ -90,7 +90,7 @@
                 label="Pick your Start Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_1" @input="calenderview = false"/>
+              <v-date-picker v-model="date_1" @input="calenderfrom = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
@@ -114,14 +114,14 @@
                 label="Pick your End Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_2" @input="calenderview = false"/>
+              <v-date-picker v-model="date_2" @input="calenderto = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
 
         <v-select v-model="select_username" :rules="[rules.required]" :items="usernames" required=""/>
 
-        <v-btn :disabled="!form" @click="get_attend_report()">Show Report</v-btn>
+        <v-btn :disabled="!form" @click="get_user_report()">Show Report</v-btn>
         <v-divider/>
 
         <v-data-table class="tables" :headers="headers" :items="selected_attendreport">
@@ -158,9 +158,13 @@ export default {
     select_username:'',
     date_1: new Date().toISOString().substr(0, 10),
     date_2: new Date().toISOString().substr(0, 10),
+    date_3: new Date().toISOString().substr(0, 10),
+    date_4: new Date().toISOString().substr(0, 10),
     calenderview: false,
     calenderto: '',
     calenderfrom: '',
+    calendertoo: '',
+    calenderfroom: '',
     rules:{
       required: v=>!!v || 'Cannot be left empty!',
     }
@@ -193,7 +197,7 @@ export default {
     },
 
     //GETTING ATTENDANCE REPORT FOR SELECTED USER
-    get_attend_report(){
+    get_user_report(){
       Axios({
         methods:'post',
         url: baseUrl + 'attend/v1/user-attendance-date-wise/',
@@ -211,7 +215,7 @@ export default {
             // }
         })
         .catch(function (error){
-            console.log('error: error in get_attend_report module' + error)
+            console.log('error: error in get_user_report module' + error)
         })
     },
 

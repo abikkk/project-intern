@@ -29,7 +29,7 @@
                 label="Pick your Start Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_1" @input="calenderview = false"/>
+              <v-date-picker v-model="date_1" @input="calenderfrom = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
@@ -53,7 +53,7 @@
                 label="Pick your End Date."
                 prepend-icon="event" required
                 readonly/>
-              <v-date-picker v-model="date_2" @input="calenderview = false"/>
+              <v-date-picker v-model="date_2" @input="calenderto = false"/>
             </v-menu>   
           </v-flex>
         </v-layout>
