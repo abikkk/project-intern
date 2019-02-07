@@ -51,25 +51,6 @@
       </v-card>
     </div>
 
-  <!-- profile view -->
-  <div id="profile_view">
-    <h4>Profile:<p id="p_group" class="pv-text"/></h4>
-    UserName: <p id="p_username" class="pv-text"/>
-    First Name: <p id="p_fname" class="pv-text"/>
-    Contact: <p id="p_contact" class="pv-text"/>
-    Current Branch: <p id="p_branch" class="pv-text"/>
-    Email: <p id="p_email" class="pv-text"/>
-    For detailed view, click <router-link to="/Account-Update">here.</router-link>
-    <v-divider/>
-
-    <!-- attend stat -->
-    <div id="attend-stat">
-      <h4>Attendance Status:</h4>
-      <p id="check_status"></p>
-        Check in time: <router-link to="/Attendance-View"><p id="attend-pv"/></router-link>
-    </div>
-  </div>
-
   <!--Logout Module -->
     <v-dialog width="fit-content" v-model="dialog" absolute id="dailog-box" persistent>
       <v-card id="dailog-card">

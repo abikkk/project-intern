@@ -187,12 +187,13 @@ export default {
     })
         .then(respo=>{
           console.log(respo)
+          this.attendreport=respo.data
             // for(let index in respo.data){
             //   this.selected_attendreport.push(respo.data[index])
             // }
         })
         .catch(function (error){
-            console.log('error: error in get_attend_report module' + error)
+            console.log('error: error in get_selected_report module' + error)
         })
     },
 
@@ -210,6 +211,7 @@ export default {
     })
         .then(respo=>{
           console.log(respo)
+          this.attendreport=respo.data 
             // for(let index in respo.data){
             //   this.selected_attendreport.push(respo.data[index])
             // }

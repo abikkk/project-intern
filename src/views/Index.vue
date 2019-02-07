@@ -1,103 +1,124 @@
 <template>
   <div id="index">
-    <h1 id="title">Home</h1>
+    <!-- profile view -->
+    <div id="profile_view">
+      <h4>Profile:<p id="p_group" class="pv-text"/></h4>
+      UserName: <p id="p_username" class="pv-text"/>
+      First Name: <p id="p_fname" class="pv-text"/>
+      Contact: <p id="p_contact" class="pv-text"/>
+      Current Branch: <p id="p_branch" class="pv-text"/>
+      Email: <p id="p_email" class="pv-text"/>
+      For detailed view, click <router-link to="/Account-Update">here.</router-link>
+      <v-divider/>
 
-    <!-- div for admin or OM -->
-    <div id="admin_om" hidden>
-      <v-tabs v-model="active">
-      <!-- all users -->
-        <v-tab>
-          Current Users
-        </v-tab>
-        <v-tab-item>
-          <!-- profile cards -->
-          <div id="profile_cards">
-            <v-data-iterator 
-                content-tag="v-layout"
-                :items="user_profiles"
-                :rows-per-page-items="pages"
-                no-data-text="No Staffs registered, please add new accounts" wrap>
-                <v-flex slot="item" slot-scope="props">
-                  <v-card>
-                    <v-card-title @click="search_user(props.item.user)">
-                      <h4>Username: {{ props.item.user }}</h4>
-                    </v-card-title>
-                    <v-divider></v-divider>
-                    <v-list dense>
-                      <v-list-tile>
-                        <v-list-tile-content>ID:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.user_id }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Email:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.email }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Current Branch:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.branch }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Current Group:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.group }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>First name:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.fname }}</v-list-tile-content>
-                      </v-list-tile>
-                    </v-list>
-                  </v-card>
-                </v-flex>
-              </v-data-iterator>
-          </div>
-        </v-tab-item>
-      
-      <!-- today view -->
-        <v-tab>
-          Today
-        </v-tab>
-        <v-tab-item>
-          <v-data-table class="tables" :headers="headers_all_attend" :items="today_attend">
-              <template slot="items" slot-scope="prop">
-                  <td> {{ prop.item.user.username }} </td>
-                  <td> {{ prop.item.check_in }} </td>
-                  <td> {{ prop.item.check_out }} </td>
-                  <td> {{ prop.item.check_in_date }} </td>
-              </template>
-          </v-data-table>
-        </v-tab-item>
-
-      <!-- user view -->
-        <v-tab>
-          User
-        </v-tab>
-        <v-tab-item>
-          <v-form ref="form" v-model="form">
-            <v-text-field v-model="username" label="UserName" readonly/>
-            <v-text-field v-model="gender" label="Gender" readonly/>
-            <v-text-field v-model="fname" label="First Name" readonly/>
-            <v-text-field v-model="lname" label="Last Name" readonly/>
-            <v-text-field v-model="address" label="Address" readonly/>
-            <v-text-field v-model="contact" label="Contact" readonly/>
-            <v-text-field v-model="email" label="E-mail" readonly/>
-            <v-text-field v-model="current_group" label="Current Group" readonly/>
-        </v-form>
-        <div id="attendview-body">
-        <h1>Attendance Report for current user:</h1>
-          <v-data-table :headers="headers" :items="attend_report" class="tables" >
-              <template slot="items" slot-scope="prop">
-                  <td>{{ prop.item.check_in }}</td>
-                  <td>{{ prop.item.check_out }}</td>
-                  <td>{{ prop.item.check_in_date }}</td>
-              </template>
-          </v-data-table>
-        </div>
-        </v-tab-item>
-      </v-tabs>
+      <!-- attend stat -->
+      <div id="attend-stat">
+        <h4>Attendance Status:</h4>
+        <p id="check_status"></p>
+          Check in time: <router-link to="/Attendance-View"><p id="attend-pv"/></router-link>
+      </div>
     </div>
 
-    <!-- div for normal staff -->
-    <div id="non_adminORom" hidden>
-      (staff)
+    <div>
+      <h1 id="title">Home</h1>
+
+      <!-- div for admin or OM -->
+      <div id="admin_om" hidden>
+        <v-tabs v-model="active">
+        <!-- all users -->
+          <v-tab>
+            Current Users
+          </v-tab>
+          <v-tab-item>
+            <!-- profile cards -->
+            <div id="profile_cards">
+              <v-data-iterator 
+                  content-tag="v-layout"
+                  :items="user_profiles"
+                  :rows-per-page-items="pages"
+                  no-data-text="No Staffs registered, please add new accounts" wrap>
+                  <v-flex slot="item" slot-scope="props">
+                    <v-card>
+                      <v-card-title @click="search_user(props.item.user)">
+                        <h4>Username: {{ props.item.user }}</h4>
+                      </v-card-title>
+                      <v-divider></v-divider>
+                      <v-list dense>
+                        <v-list-tile>
+                          <v-list-tile-content>ID:</v-list-tile-content>
+                          <v-list-tile-content class="align-end">{{ props.item.user_id }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Email:</v-list-tile-content>
+                          <v-list-tile-content class="align-end">{{ props.item.email }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Current Branch:</v-list-tile-content>
+                          <v-list-tile-content class="align-end">{{ props.item.branch }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Current Group:</v-list-tile-content>
+                          <v-list-tile-content class="align-end">{{ props.item.group }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>First name:</v-list-tile-content>
+                          <v-list-tile-content class="align-end">{{ props.item.fname }}</v-list-tile-content>
+                        </v-list-tile>
+                      </v-list>
+                    </v-card>
+                  </v-flex>
+                </v-data-iterator>
+            </div>
+          </v-tab-item>
+        
+        <!-- today view -->
+          <v-tab>
+            Today
+          </v-tab>
+          <v-tab-item>
+            <v-data-table class="tables" :headers="headers_all_attend" :items="today_attend">
+                <template slot="items" slot-scope="prop">
+                    <td> {{ prop.item.user.username }} </td>
+                    <td> {{ prop.item.check_in }} </td>
+                    <td> {{ prop.item.check_out }} </td>
+                    <td> {{ prop.item.check_in_date }} </td>
+                </template>
+            </v-data-table>
+          </v-tab-item>
+
+        <!-- user view -->
+          <v-tab>
+            User
+          </v-tab>
+          <v-tab-item>
+            <v-form ref="form" v-model="form">
+              <v-text-field v-model="username" label="UserName" readonly/>
+              <v-text-field v-model="gender" label="Gender" readonly/>
+              <v-text-field v-model="fname" label="First Name" readonly/>
+              <v-text-field v-model="lname" label="Last Name" readonly/>
+              <v-text-field v-model="address" label="Address" readonly/>
+              <v-text-field v-model="contact" label="Contact" readonly/>
+              <v-text-field v-model="email" label="E-mail" readonly/>
+              <v-text-field v-model="current_group" label="Current Group" readonly/>
+          </v-form>
+          <div id="attendview-body">
+          <h1>Attendance Report for current user:</h1>
+            <v-data-table :headers="headers" :items="attend_report" class="tables" >
+                <template slot="items" slot-scope="prop">
+                    <td>{{ prop.item.check_in }}</td>
+                    <td>{{ prop.item.check_out }}</td>
+                    <td>{{ prop.item.check_in_date }}</td>
+                </template>
+            </v-data-table>
+          </div>
+          </v-tab-item>
+        </v-tabs>
+      </div>
+
+      <!-- div for normal staff -->
+      <div id="non_adminORom" hidden>
+        (staff)
+      </div>
     </div>
   </div>
 </template>
@@ -190,7 +211,7 @@ export default {
         }
       })
       .catch(function(error){
-        console.log('error: error in getAttendToday' + error)
+        console.log('error: error in getTodayUserAttend' + error)
       })
     },
 
@@ -342,7 +363,8 @@ export default {
 
 /* current user profile preview */
 #profile_view{
-  position: absolute;
+  position: fixed;
+  top: 3%;
   right: 1%;
   padding: 1%;
   margin: 2%;

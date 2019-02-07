@@ -10,7 +10,7 @@
                         <v-data-table :items="all_groups" class="tables">
                                 <template slot="items" slot-scope="prop">
                                     <td>Group Name:</td>
-                                    <td> {{prop.item.name}} </td>
+                                    <td @click="editbranch=true"> {{prop.item.name}} </td>
                                 </template>
                         </v-data-table>
                     </v-card-text>
@@ -19,7 +19,7 @@
                         <h2>Add new group:</h2>
                         <v-text-field v-model="new_groupname" :rules="[rules.required]" label="New Group name" required/>
                         <h3>Available Groups</h3>
-                        <v-data-table title="Available Groups" :headers="header_permission" :items="all_permissions" class="tables">
+                        <v-data-table title="Available Permissions" :headers="header_permission" :items="all_permissions" class="tables">
                                 <template slot="items" slot-scope="prop">
                                     <td> {{prop.item.id}} </td>
                                     <td> {{prop.item.name}} </td>
@@ -31,6 +31,19 @@
                         <v-btn @click="reset_groups()">Clear Added Groups</v-btn>
                         <v-btn :disabled="!group_add" @click="addGroup()" primary>Add Group</v-btn>
                     </v-form>
+
+                    <v-dialog v-model="editbranch" width="fit-content" absolute id="dailog-box" persistent>
+                        <v-card>
+                            <v-data-table title="Previous Permissions" :headers="header_permission" :items="all_permissions" class="tables">
+                                <template slot="items" slot-scope="prop">
+                                    <td> {{prop.item.id}} </td>
+                                    <td> {{prop.item.name}} </td>
+                                    <td> <v-btn @click="updatepermissions(prop.item.id)">Add</v-btn></td>
+                                </template>
+                        </v-data-table>
+                            <v-btn @click="editbranch=false">close</v-btn>
+                        </v-card>
+                    </v-dialog>
                 </v-card>
             </v-tab-item>
 
@@ -81,6 +94,7 @@ export default {
         active:'',
         new_branchname:'',
         new_groupname:'',
+        editbranch:false,
         rules:{
             required: v => !!v || 'Cannot be left empty',
         }

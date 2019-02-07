@@ -1,2 +1,2 @@
-let baseUrl = "http://e489770d.ngrok.io/"
+let baseUrl = "http://35.197.39.210:8000/"
 export {baseUrl}
